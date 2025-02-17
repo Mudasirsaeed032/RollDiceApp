@@ -7,9 +7,16 @@ Alignment startAlign = Alignment.topLeft;
 Alignment? endAlign;
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer(this.colors, {super.key});
+  GradientContainer(this.colors, {super.key});
 
   final List<Color> colors;
+
+  var activDiceImage = 'assets/images/dice-2.png';
+
+  void rollDice() {
+    activDiceImage = 'assets/images/dice-4.png';
+    print('Button is pressed!');
+  }
 
   @override
   Widget build(context) {
@@ -22,7 +29,23 @@ class GradientContainer extends StatelessWidget {
           end: endAlignment,
         ),
       ),
-      child: Center(child: StyledText('this is some more text')),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(activDiceImage, width: 250),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: rollDice,
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                textStyle: const TextStyle(fontSize: 28),
+              ),
+              child: Text('Roll Dice'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
